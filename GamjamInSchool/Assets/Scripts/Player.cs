@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
         {
             Kill();
         }
+
+        if (collision.gameObject.CompareTag("win"))
+        {
+            GameManager.Instance.Win();
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

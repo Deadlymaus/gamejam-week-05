@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public float speed = 2f;
     public GameObject killWall;
     public GameObject GameOver;
+    public GameObject WinHUD;
 
     public bool win;
     public bool lose;
@@ -26,8 +27,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Camera.main.transform.Translate(Vector3.right * Time.deltaTime * speed);
-        killWall.transform.Translate(Vector3.right * Time.deltaTime * speed);
+        if(Camera.main.transform.position.x < 46.5f)
+        {
+            Camera.main.transform.Translate(Vector3.right * Time.deltaTime * speed);
+            killWall.transform.Translate(Vector3.right * Time.deltaTime * speed);
+        }
+    }
+
+    public void Win()
+    {
+        win = true;
+        GameOver.SetActive(true);
     }
 
     public void Lose()
@@ -39,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         lose = false;
+        win = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
